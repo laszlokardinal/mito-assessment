@@ -1,0 +1,20 @@
+{
+  "name": "sitebuild",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel src/*.html",
+    "build": "parcel build src/*.html",
+    "format": "prettier --write \"src/**/*.{html,scss}\"",
+    "format:watch": "onchange --await-write-finish 0 \"src/**/*.{html,scss}\" -- sh -c 'clear; npx prettier --write {{changed}}'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "onchange": "^6.0.0",
+    "parcel-bundler": "^1.12.3",
+    "prettier": "^1.18.2",
+    "sass": "^1.22.10"
+  }
+}
