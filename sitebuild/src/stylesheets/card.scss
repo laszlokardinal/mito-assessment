@@ -1,0 +1,44 @@
+.card__wrapper {
+  margin: 50px;
+  max-width: 570px;
+
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.card__header {
+  background-color: $primary;
+
+  display: flex;
+  align-items: center;
+}
+
+.card__logo {
+  margin: 10px 15px;
+}
+
+.card__title {
+  color: $white;
+
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 20px;
+  text-transform: uppercase;
+}
+
+.card__body {
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+
+  @media only screen and (min-width: 670px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  background: $white;
+}
