@@ -66,3 +66,11 @@
 .datepicker__button::-moz-focus-inner {
   border: 0;
 }
+
+.datepicker__button--disabled {
+  color: $gray;
+}
+
+.datepicker__button--disabled:hover {
+  background-color: $white;
+}
