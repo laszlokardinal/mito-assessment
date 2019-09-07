@@ -14,3 +14,38 @@
   border: 0;
   background: transparent;
 }
+
+.dropdown-input__list {
+  position: absolute;
+  top: 100%;
+  width: 250px;
+  height: 250px;
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-input__item {
+  padding: 8px 15px;
+
+  border: 0;
+  outline: 0;
+
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: left;
+
+  background-color: $white;
+}
+
+.dropdown-input__item:hover {
+  background-color: $hover-gray;
+}
+
+.dropdown-input__item::-moz-focus-inner {
+  border: 0;
+}
