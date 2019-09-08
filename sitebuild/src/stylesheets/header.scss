@@ -11,7 +11,14 @@
 }
 
 .header__departure-wrapper {
-  margin-left: 126px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    margin-left: 126px;
+    justify-content: flex-start;
+  }
 }
 
 .header__label {
@@ -22,10 +29,20 @@
   line-height: 12px;
   text-transform: uppercase;
   color: $white;
+
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
 }
 
 .header__arrows {
-  margin-left: 40px;
+  margin-left: 10px;
+
+  @media (min-width: 768px) {
+    margin-left: 40px;
+  }
 
   display: flex;
   flex-direction: column;
@@ -38,8 +55,19 @@
 }
 
 .header__destination-wrapper {
-  margin-top: 24px;
-  margin-left: 40px;
+  margin-left: 10px;
+
+  @media (min-width: 768px) {
+    margin-top: 24px;
+    margin-left: 40px;
+  }
+
+  display: flex;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    align-items: stretch;
+  }
 }
 
 .header__airport {
