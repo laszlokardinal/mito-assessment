@@ -1,0 +1,48 @@
+.flight-card__wrapper {
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+.flight-card__wrapper + .flight-card__wrapper {
+  margin-top: 40px;
+}
+
+.flight-card__header {
+  height: 60px;
+  background-color: $background-gray;
+
+  display: flex;
+  align-items: center;
+}
+
+.flight-card__title {
+  margin-left: 20px;
+
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-transform: uppercase;
+  color: $gray;
+}
+
+.flight-card__airports {
+  margin-left: 50px;
+
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 22px;
+  line-height: 26px;
+  text-transform: capitalize;
+  color: $primary;
+
+  display: flex;
+}
+
+.flight-card__arrow {
+  margin: 0 25px;
+}
+
+.flight-card__body {
+  background-color: $white;
+}
