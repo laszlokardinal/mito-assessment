@@ -4,6 +4,11 @@ $hover-gray: lighten($gray, 36%);
 $white: #ffffff;
 $primary: #06038d;
 $secondary: #c6007e;
+
 $button-blue: #3434e0;
 $button-hover-blue: darken($button-blue, 10%);
+$button-magenta: $secondary;
+$button-hover-magenta: lighten($button-magenta, 5%);
+$button-gray: #c1c1c1;
+
 $title-blue: #0a008b;

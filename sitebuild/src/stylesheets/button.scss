@@ -28,6 +28,23 @@
   background-color: $button-hover-blue;
 }
 
+.button--secondary-color {
+  background-color: $button-magenta;
+}
+
+.button--secondary-color:hover {
+  background-color: $button-hover-magenta;
+}
+
+.button--full-width {
+  width: 100%;
+}
+
+.button--disabled,
+.button--disabled:hover {
+  background-color: $button-gray;
+}
+
 .button::-moz-focus-inner {
   border: 0;
 }
