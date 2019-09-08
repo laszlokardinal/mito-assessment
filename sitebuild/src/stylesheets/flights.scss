@@ -1,0 +1,157 @@
+.flights__wrapper {
+}
+
+.flights__header {
+  padding: 15px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: uppercase;
+
+  background-color: $white;
+}
+
+.flights__items {
+  background-color: $white;
+
+  margin-top: -12px;
+}
+
+.flights__item {
+  padding: 15px;
+  background-color: $white;
+
+  display: flex;
+  align-items: flex-start;
+}
+
+.flights__calendar {
+  border: 2px solid $border-gray;
+  border-radius: 3px;
+}
+
+.flights__month {
+  background-color: $background-gray;
+
+  width: 36px;
+  height: 21px;
+
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 15px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flights__day {
+  width: 36px;
+  height: 21px;
+
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flights__text-wrapper {
+  margin: 0 12px;
+}
+
+.flights__departure,
+.flights__destination {
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 15px;
+}
+
+.flights__time {
+  margin-top: 4px;
+
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.flights__separator {
+  height: 0px;
+
+  background-color: $border-gray;
+  border-top: 1px dashed $gray;
+
+  position: relative;
+
+  &:before {
+    content: " ";
+
+    position: absolute;
+    top: -5px;
+    left: calc(50% - 5px);
+    width: 9px;
+    height: 9px;
+
+    border-right: 1px solid $gray;
+    border-bottom: 1px solid $gray;
+
+    transform: rotate(45deg);
+
+    background-color: $white;
+  }
+
+  &:after {
+    content: " ";
+
+    position: absolute;
+    top: -1px;
+    left: calc(50% - 6px);
+    width: 12px;
+
+    border-top: 1px solid $border-gray;
+  }
+}
+
+.flights__placeholder {
+  background-color: $white;
+
+  padding: 3px 70px 20px 15px;
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: $gray;
+}
+
+.flights__total {
+  padding: 15px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: $white;
+
+  background-color: $primary;
+}
+
+.flights__button {
+  margin-top: 20px;
+}
