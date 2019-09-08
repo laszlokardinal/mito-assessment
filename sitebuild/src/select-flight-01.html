@@ -35,56 +35,61 @@
           Select flight
         </h1>
       </div>
-      <div class="flights__wrapper">
-        <div class="flights__header">
-          <span>Flights</span>
-          <span>$0</span>
-        </div>
-        <div class="flight__wrappers">
-          <div class="flight__wrapper">
-            <div class="flight__calendar">
-              <div class="flight__month">Nov</div>
-              <div class="flight__day">3</div>
+      <div class="select-flight__wrapper">
+        <div class="select-flight__flights">
+          <div class="flights__wrapper">
+            <div class="flights__header">
+              <span>Flights</span>
+              <span>$0</span>
             </div>
-            <div class="flight__text-wrapper">
-              <div class="flight__departure">Budapest -</div>
-              <div class="flight__destination">Barcelona El Prat</div>
-              <div class="flight__time">Wed 06:02 – 07:35</div>
+            <div class="flight__wrappers">
+              <div class="flight__wrapper">
+                <div class="flight__calendar">
+                  <div class="flight__month">Nov</div>
+                  <div class="flight__day">3</div>
+                </div>
+                <div class="flight__text-wrapper">
+                  <div class="flight__departure">Budapest -</div>
+                  <div class="flight__destination">Barcelona El Prat</div>
+                  <div class="flight__time">Wed 06:02 – 07:35</div>
+                </div>
+              </div>
+              <div class="flights__separator"></div>
+              <div class="flight__wrapper">
+                <div class="flight__calendar">
+                  <div class="flight__month">Nov</div>
+                  <div class="flight__day">4</div>
+                </div>
+                <div class="flight__text-wrapper">
+                  <div class="flight__departure">Barcelona El Prat -</div>
+                  <div class="flight__destination">Budapest</div>
+                  <div class="flight__time">Wed 06:02 – 07:35</div>
+                </div>
+              </div>
+            </div>
+            <div class="flights__placeholder">
+              Choose an outbound flight
+            </div>
+            <div class="flights__total">
+              <span>Total</span>
+              <span>$0</span>
+            </div>
+            <div class="flights__button">
+              <button class="button button--secondary-color button--full-width">
+                Pay now
+              </button>
+            </div>
+            <div class="flights__button">
+              <button
+                disabled
+                class="button button--secondary-color button--full-width button--disabled"
+              >
+                Pay now
+              </button>
             </div>
           </div>
-          <div class="flights__separator"></div>
-          <div class="flight__wrapper">
-            <div class="flight__calendar">
-              <div class="flight__month">Nov</div>
-              <div class="flight__day">4</div>
-            </div>
-            <div class="flight__text-wrapper">
-              <div class="flight__departure">Barcelona El Prat -</div>
-              <div class="flight__destination">Budapest</div>
-              <div class="flight__time">Wed 06:02 – 07:35</div>
-            </div>
-          </div>
         </div>
-        <div class="flights__placeholder">
-          Choose an outbound flight
-        </div>
-        <div class="flights__total">
-          <span>Total</span>
-          <span>$0</span>
-        </div>
-        <div class="flights__button">
-          <button class="button button--secondary-color button--full-width">
-            Pay now
-          </button>
-        </div>
-        <div class="flights__button">
-          <button
-            disabled
-            class="button button--secondary-color button--full-width button--disabled"
-          >
-            Pay now
-          </button>
-        </div>
+        <div class="select-flight__cards"></div>
       </div>
     </div>
   </body>
