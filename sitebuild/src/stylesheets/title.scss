@@ -1,0 +1,36 @@
+.title__wrapper {
+  margin: 25px 20px;
+
+  @media (min-width: 768px) {
+    margin: 45px 20px;
+  }
+
+  display: flex;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+  }
+}
+
+.title__icon {
+  @media (min-width: 768px) {
+    margin-left: 250px;
+  }
+}
+
+.title__text {
+  margin: 0 0 0 25px;
+
+  font-family: Roboto;
+  font-weight: 300;
+  line-height: 47px;
+  text-transform: uppercase;
+  color: $title-blue;
+
+  font-size: 30px;
+
+  @media (min-width: 768px) {
+    font-size: 40px;
+  }
+}
