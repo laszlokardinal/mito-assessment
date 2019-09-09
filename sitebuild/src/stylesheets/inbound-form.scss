@@ -1,0 +1,16 @@
+.inbound-form__wrapper {
+  padding: 40px 10px 0px 10px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.inbound-form__button-wrapper {
+  width: 250px;
+  margin-bottom: 50px;
+
+  @media (min-width: 600px) {
+    width: 125px;
+  }
+}
