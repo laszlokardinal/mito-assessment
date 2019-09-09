@@ -1,0 +1,5 @@
+tmp
+public/bundle.*
+node_modules
+.env
+dev.sh
