@@ -1,14 +1,30 @@
 .select-flight__wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
 }
 
 .select-flight__flights {
-  margin-left: 20px;
-  width: 230px;
+  margin: 0px 20px 40px 20px;
+  order: 2;
+
+  @media (min-width: 1024px) {
+    margin: 0px 0px 40px 20px;
+    width: 230px;
+    order: 1;
+  }
 }
 
 .select-flight__cards {
   flex-grow: 1;
   margin: 0 20px;
+
+  order: 1;
+
+  @media (min-width: 1024px) {
+    order: 2;
+  }
 }

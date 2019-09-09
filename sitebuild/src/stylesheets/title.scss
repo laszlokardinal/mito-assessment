@@ -8,13 +8,13 @@
   display: flex;
   justify-content: center;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     justify-content: flex-start;
   }
 }
 
 .title__icon {
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     margin-left: 250px;
   }
 }
