@@ -13,5 +13,443 @@
     />
     <script src="index.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="header__wrapper">
+      <img class="header__logo" src="images/mito-logo.svg" />
+      <div class="header__departure-wrapper">
+        <div class="header__label">Leaving from</div>
+        <div class="header__airport">Budapest</div>
+      </div>
+      <div class="header__arrows">
+        <img class="header__arrow" src="images/arrow-left.svg" />
+        <img class="header__arrow" src="images/arrow-right.svg" />
+      </div>
+      <div class="header__destination-wrapper">
+        <div class="header__airport">Barcelona El Prat</div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="title__wrapper">
+        <img class="title__icon" src="images/airplane.svg" />
+        <h1 class="title__text">
+          Select flight
+        </h1>
+      </div>
+      <div class="select-flight__wrapper">
+        <div class="select-flight__flights">
+          <div class="flights__wrapper">
+            <div class="flights__header">
+              <span>Flights</span>
+              <span>$29.98</span>
+            </div>
+            <div class="flight__wrappers">
+              <div class="flight__wrapper">
+                <div class="flight__calendar">
+                  <div class="flight__month">Nov</div>
+                  <div class="flight__day">3</div>
+                </div>
+                <div class="flight__text-wrapper">
+                  <div class="flight__departure">Budapest -</div>
+                  <div class="flight__destination">Barcelona El Prat</div>
+                  <div class="flight__time">Wed 06:02 – 07:35</div>
+                </div>
+              </div>
+              <div class="flights__separator"></div>
+              <div class="flight__wrapper">
+                <div class="flight__calendar">
+                  <div class="flight__month">Nov</div>
+                  <div class="flight__day">4</div>
+                </div>
+                <div class="flight__text-wrapper">
+                  <div class="flight__departure">Barcelona El Prat -</div>
+                  <div class="flight__destination">Budapest</div>
+                  <div class="flight__time">Wed 06:02 – 07:35</div>
+                </div>
+              </div>
+            </div>
+            <div class="flights__total">
+              <span>Total</span>
+              <span>$29.98</span>
+            </div>
+            <div class="flights__button">
+              <button class="button button--secondary-color button--full-width">
+                Pay now
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="select-flight__cards">
+          <div class="flight-card__wrapper">
+            <div class="flight-card__header">
+              <div class="flight-card__title">Outbound</div>
+              <div class="flight-card__airports">
+                Budapest
+                <img
+                  class="flight-card__arrow"
+                  src="images/card-arrow-right.svg"
+                />
+                Barcelona El Prat
+              </div>
+            </div>
+            <div class="flight-card__body">
+              <div class="flight-date-selector__wrapper">
+                <button class="flight-date-selector__button">
+                  <div
+                    class="flight-date-selector__caret flight-date-selector__caret--left"
+                  ></div>
+                  <div class="flight-date-selector__label">WED 7 OCTOBER</div>
+                </button>
+                <div class="flight-date-selector__date">
+                  Saturday, 3 November 2015
+                </div>
+                <button
+                  class="flight-date-selector__button flight-date-selector__button--align-right"
+                >
+                  <div class="flight-date-selector__label">sat 10 october</div>
+                  <div
+                    class="flight-date-selector__caret flight-date-selector__caret--right"
+                  ></div>
+                </button>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div
+                  class="flight-ticket-selector__row flight-ticket-selector__row--first"
+                >
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button class="flight-ticket-selector__button">
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button class="flight-ticket-selector__button">
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div class="flight-ticket-selector__row">
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button class="flight-ticket-selector__button">
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button class="flight-ticket-selector__button">
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div class="flight-ticket-selector__row">
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button class="flight-ticket-selector__button">
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button class="flight-ticket-selector__button">
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div class="flight-ticket-selector__row">
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button
+                      class="flight-ticket-selector__button flight-ticket-selector__button--selected"
+                    >
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button class="flight-ticket-selector__button">
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flight-card__wrapper">
+            <div class="flight-card__header">
+              <div class="flight-card__title">Inbound</div>
+              <div class="flight-card__airports">
+                Barcelona El Prat
+                <img
+                  class="flight-card__arrow"
+                  src="images/card-arrow-right.svg"
+                />
+                Budapest
+              </div>
+            </div>
+            <div class="flight-card__body">
+              <div class="flight-date-selector__wrapper">
+                <button class="flight-date-selector__button">
+                  <div
+                    class="flight-date-selector__caret flight-date-selector__caret--left"
+                  ></div>
+                  <div class="flight-date-selector__label">WED 7 OCTOBER</div>
+                </button>
+                <div class="flight-date-selector__date">
+                  Saturday, 3 November 2015
+                </div>
+                <button
+                  class="flight-date-selector__button flight-date-selector__button--align-right"
+                >
+                  <div class="flight-date-selector__label">sat 10 october</div>
+                  <div
+                    class="flight-date-selector__caret flight-date-selector__caret--right"
+                  ></div>
+                </button>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div
+                  class="flight-ticket-selector__row flight-ticket-selector__row--first"
+                >
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button class="flight-ticket-selector__button">
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button class="flight-ticket-selector__button">
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div class="flight-ticket-selector__row">
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button class="flight-ticket-selector__button">
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button
+                      class="flight-ticket-selector__button flight-ticket-selector__button--selected"
+                    >
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div class="flight-ticket-selector__row">
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button class="flight-ticket-selector__button">
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button class="flight-ticket-selector__button">
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="flight-ticket-selector__wrapper">
+                <div class="flight-ticket-selector__row">
+                  <div class="flight-ticket-selector__time">
+                    06:02
+                    <img
+                      class="flight-ticket-selector__arrow"
+                      src="images/arrow-small.svg"
+                    />
+                    07:35
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Basic</div>
+                    <button class="flight-ticket-selector__button">
+                      $9.99
+                    </button>
+                  </div>
+                  <div
+                    class="flight-ticket-selector__button-wrapper flight-ticket-selector__button-wrapper--gray-background"
+                  >
+                    <div class="flight-ticket-selector__label">Standard</div>
+                    <button class="flight-ticket-selector__button">
+                      $19.99
+                    </button>
+                  </div>
+                  <div class="flight-ticket-selector__button-wrapper">
+                    <div class="flight-ticket-selector__label">Plus</div>
+                    <button class="flight-ticket-selector__button">
+                      $29.99
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="checkout-modal__shadow">
+      <div class="checkout-modal__wrapper">
+        <div class="checkout-modal__header">
+          Thanks for buying your tickets at mito airlines
+        </div>
+        <div class="checkout-modal__body">
+          <div class="flight__wrapper">
+            <div class="flight__calendar">
+              <div class="flight__month">Nov</div>
+              <div class="flight__day">3</div>
+            </div>
+            <div class="flight__text-wrapper">
+              <div class="flight__departure">Budapest -</div>
+              <div class="flight__destination">Barcelona El Prat</div>
+              <div class="flight__time">Wed 06:02 – 07:35</div>
+            </div>
+          </div>
+          <div class="flight__wrapper">
+            <div class="flight__calendar">
+              <div class="flight__month">Nov</div>
+              <div class="flight__day">4</div>
+            </div>
+            <div class="flight__text-wrapper">
+              <div class="flight__departure">Barcelona El Prat -</div>
+              <div class="flight__destination">Budapest</div>
+              <div class="flight__time">Wed 06:02 – 07:35</div>
+            </div>
+          </div>
+        </div>
+        <div class="checkout-modal__footer">
+          <div class="checkout-modal__total">
+            Total: <span class="checkout-modal__cost">$9.99</span>
+          </div>
+          <a href="#" class="checkout-modal__reset">No, thanks (reset)</a>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
