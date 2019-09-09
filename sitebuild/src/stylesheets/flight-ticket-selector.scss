@@ -1,0 +1,133 @@
+.flight-ticket-selector__wrapper {
+}
+
+.flight-ticket-selector__row {
+  border-top: 1px solid $border-gray;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  @media (min-width: 768px) {
+    flex-wrap: nowrap;
+  }
+
+  padding: 0 5px;
+
+  @media (min-width: 768px) {
+    padding: 0;
+  }
+}
+
+.flight-ticket-selector__time {
+  flex-basis: 100%;
+
+  font-family: Roboto;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: $black;
+
+  font-size: 18px;
+  line-height: 21px;
+
+  @media (min-width: 768px) {
+    font-size: 15px;
+    line-height: 18px;
+  }
+
+  padding: 15px 15px 5px 15px;
+
+  @media (min-width: 768px) {
+    padding: 15px;
+  }
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+  }
+}
+
+.flight-ticket-selector__arrow {
+  margin: auto 8px;
+}
+
+.flight-ticket-selector__button-wrapper {
+  flex-basis: 33.33333%;
+
+  position: relative;
+}
+
+.flight-ticket-selector__button-wrapper--gray-background {
+  @media (min-width: 768px) {
+    background-color: $background-gray;
+  }
+}
+
+.flight-ticket-selector__label {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  width: 100%;
+
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: $black-2;
+
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .flight-ticket-selector__label {
+    display: none;
+  }
+
+  .flight-ticket-selector__row--first .flight-ticket-selector__label {
+    display: block;
+  }
+}
+
+.flight-ticket-selector__button {
+  margin: 24px 5px 20px 5px;
+  width: calc(100% - 10px);
+  height: 50px;
+
+  @media (min-width: 768px) {
+    margin: 24px 18px;
+    width: 160px;
+  }
+
+  font-family: Roboto;
+  font-weight: bold;
+  text-transform: uppercase;
+
+  font-size: 16px;
+  line-height: 19px;
+
+  @media (min-width: 768px) {
+    font-size: 20px;
+    line-height: 23px;
+  }
+
+  border: 2px solid $secondary;
+  border-radius: 2px;
+  outline: 0;
+
+  background-color: $white;
+  color: $black-2;
+
+  cursor: pointer;
+}
+
+.flight-ticket-selector__button::-moz-focus-inner {
+  border: 0;
+}
+
+.flight-ticket-selector__button--selected {
+  background-color: $secondary;
+  color: $white;
+}
