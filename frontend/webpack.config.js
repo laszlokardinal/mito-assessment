@@ -4,8 +4,8 @@ const webpack = require("webpack");
 const path = require("path");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
-module.exports = {
-  mode: process.env.NODE_ENV,
+const config = {
+  mode: process.env.NODE_ENV === "production" ? "production" : "development",
   entry: ["./src/index.js"],
   output: {
     path: path.resolve(__dirname, "public"),
@@ -64,3 +64,10 @@ module.exports = {
     noInfo: true
   }
 };
+
+if (process.env.NODE_ENV === 'test') {
+  config.externals = [require('webpack-node-externals')()]
+  config.devtool = 'inline-cheap-module-source-map'
+}
+
+module.exports = config;

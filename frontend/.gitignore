@@ -3,3 +3,5 @@ public/bundle.*
 node_modules
 .env
 dev.sh
+.nyc_output
+coverage

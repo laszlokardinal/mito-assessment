@@ -1,0 +1,14 @@
+{
+  "check-coverage": true,
+  "per-file": true,
+  "lines": 95,
+  "statements": 95,
+  "functions": 95,
+  "branches": 95,
+  "include": ["src/**/*.(js|vue)"],
+  "exclude": ["public", "**/*.test.js"],
+  "reporter": ["html", "lcov", "text", "text-summary"],
+  "all": true,
+  "instrument": false,
+  "sourceMap": false
+}

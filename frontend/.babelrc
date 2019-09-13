@@ -1,9 +1,12 @@
 {
-  "presets": [
-    "@babel/preset-env"
-  ],
+  "presets": ["@babel/preset-env"],
   "plugins": [
     "@babel/plugin-external-helpers",
     "@babel/plugin-proposal-export-default-from"
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": ["istanbul"]
+    }
+  }
 }
