@@ -1,4 +1,4 @@
-export Airplane from "./airplane.svg";
+export AirplaneIcon from "./airplane-icon.svg";
 export ArrowLeft from "./arrow-left.svg";
 export ArrowRight from "./arrow-right.svg";
 export ArrowSmall from "./arrow-small.svg";
