@@ -1,5 +1,6 @@
 export DateInputField from "./DateInputField.vue";
 export DropdownInputField from "./DropdownInputField.vue";
+export FlightsCard from "./FlightsCard.vue";
 export HomeCard from "./HomeCard.vue";
-export SelectFlightTitle from "./SelectFlightTitle.vue";
 export SelectFlightHeader from "./SelectFlightHeader.vue";
+export SelectFlightTitle from "./SelectFlightTitle.vue";
