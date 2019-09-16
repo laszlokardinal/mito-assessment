@@ -1,6 +1,7 @@
 <script>
 import { CalendarIcon } from "../images";
 import { DatePicker, InputField } from "../elements";
+import { renderDate } from "../renderers";
 
 export default {
   components: { CalendarIcon, DatePicker, InputField },
@@ -16,30 +17,7 @@ export default {
   },
   computed: {
     valueString() {
-      if (!this.value) {
-        return "";
-      }
-
-      const selectedDate = new Date(this.value);
-
-      const year = selectedDate.getFullYear();
-      const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ][selectedDate.getMonth()];
-      const day = selectedDate.getDate();
-
-      return `${day} ${month} ${year}`;
+      return this.value ? renderDate(this.value) : "";
     }
   },
   methods: {

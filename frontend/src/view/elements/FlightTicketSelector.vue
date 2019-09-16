@@ -1,6 +1,8 @@
 <script>
 import { ArrowSmall } from "../images";
 
+import { renderTime } from "../renderers";
+
 export default {
   components: { ArrowSmall },
   props: {
@@ -10,38 +12,13 @@ export default {
   computed: {
     transformedFlights() {
       return this.flights.map(({ departure, arrival, fares }) => {
-        const departureDate = new Date(departure);
-        const arrivalDate = new Date(arrival);
-
-        const departureTimeString =
-          departureDate
-            .getHours()
-            .toString()
-            .padStart(2, 0) +
-          ":" +
-          departureDate
-            .getMinutes()
-            .toString()
-            .padStart(2, 0);
-
-        const arrivalTimeString =
-          arrivalDate
-            .getHours()
-            .toString()
-            .padStart(2, 0) +
-          ":" +
-          arrivalDate
-            .getMinutes()
-            .toString()
-            .padStart(2, 0);
-
         const basicFare = fares.find(({ bundle }) => bundle === "basic");
         const standardFare = fares.find(({ bundle }) => bundle === "standard");
         const premiumFare = fares.find(({ bundle }) => bundle === "plus");
 
         return {
-          departureTimeString,
-          arrivalTimeString,
+          departureTimeString: renderTime(departure),
+          arrivalTimeString: renderTime(arrival),
           basicPrice: basicFare.price,
           basicFareSellKey: basicFare.fareSellKey,
           standardPrice: standardFare.price,

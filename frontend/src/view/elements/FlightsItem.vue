@@ -1,4 +1,6 @@
 <script>
+import { renderFlightTimeInterval, renderMonth } from "../renderers";
+
 export default {
   components: {},
   props: {
@@ -9,71 +11,15 @@ export default {
   },
   computed: {
     departureMonth() {
-      const departureDate = new Date(this.departureTime);
-
-      return [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ][departureDate.getMonth()];
+      return renderMonth(new Date(this.departureTime).getMonth(), {
+        useAbbreviations: true
+      });
     },
     departureDay() {
-      const departureDate = new Date(this.departureTime);
-
-      return departureDate.getDate();
+      return new Date(this.departureTime).getDate();
     },
     flightDuration() {
-      const { departureTime, arrivalTime } = this;
-      const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-      const departureDate = new Date(departureTime);
-
-      const departureTimeString =
-        departureDate
-          .getHours()
-          .toString()
-          .padStart(2, 0) +
-        ":" +
-        departureDate
-          .getMinutes()
-          .toString()
-          .padStart(2, 0);
-
-      const departureDay = dayNames[departureDate.getDay()];
-
-      const arrivalDate = new Date(arrivalTime);
-
-      const arrivalTimeString =
-        arrivalDate
-          .getHours()
-          .toString()
-          .padStart(2, 0) +
-        ":" +
-        arrivalDate
-          .getMinutes()
-          .toString()
-          .padStart(2, 0);
-
-      const arrivalDay = dayNames[arrivalDate.getDay()];
-
-      return [
-        departureDay,
-        departureTimeString,
-        "–",
-        arrivalDay !== departureDay ? arrivalDay : null,
-        arrivalTimeString
-      ]
-        .filter(truthy => truthy)
-        .join(" ");
+      return renderFlightTimeInterval(this.departureTime, this.arrivalTime);
     }
   }
 };

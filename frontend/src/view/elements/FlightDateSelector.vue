@@ -1,5 +1,6 @@
 <script>
 import { LeftArrowChevron, RightArrowChevron } from "../images";
+import { renderDate } from "../renderers";
 
 export default {
   components: { LeftArrowChevron, RightArrowChevron },
@@ -7,89 +8,26 @@ export default {
     departureDate: { type: String, required: true }
   },
   computed: {
-    yesterday() {
+    previousDay() {
       const date = new Date(this.departureDate);
       date.setDate(date.getDate() - 1);
 
-      const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
-        date.getDay()
-      ];
-
-      const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ][date.getMonth()];
-
-      return `${day} ${date.getDate()} ${month}`;
+      return renderDate(date, {
+        displayDayAbbreviations: true,
+        omitYear: true
+      });
     },
-    today() {
-      const date = new Date(this.departureDate);
-
-      const dayString = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ][date.getDay()];
-
-      const dayNumber = date.getDate();
-
-      const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ][date.getMonth()];
-
-      const year = date.getFullYear();
-
-      return `${dayString}, ${dayNumber} ${month} ${year}`;
+    currentDay() {
+      return renderDate(this.departureDate, { displayDay: true });
     },
-    tomorrow() {
+    nextDay() {
       const date = new Date(this.departureDate);
       date.setDate(date.getDate() + 1);
 
-      const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][
-        date.getDay()
-      ];
-
-      const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ][date.getMonth()];
-
-      return `${day} ${date.getDate()} ${month}`;
+      return renderDate(date, {
+        displayDayAbbreviations: true,
+        omitYear: true
+      });
     }
   },
   methods: {
@@ -118,14 +56,14 @@ export default {
       <div class="flight-date-selector__caret">
         <left-arrow-chevron />
       </div>
-      <div class="flight-date-selector__label">{{ yesterday }}</div>
+      <div class="flight-date-selector__label">{{ previousDay }}</div>
     </button>
-    <div class="flight-date-selector__date">{{ today }}</div>
+    <div class="flight-date-selector__date">{{ currentDay }}</div>
     <button
       class="flight-date-selector__button flight-date-selector__button--align-right"
       @click="handleNextDayClick"
     >
-      <div class="flight-date-selector__label">{{ tomorrow }}</div>
+      <div class="flight-date-selector__label">{{ nextDay }}</div>
       <div class="flight-date-selector__caret">
         <right-arrow-chevron />
       </div>

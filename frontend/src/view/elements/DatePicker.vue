@@ -3,6 +3,8 @@ import ClickOutside from "vue-click-outside";
 
 import { LeftArrowChevron, RightArrowChevron } from "../images";
 
+import { renderMonth } from "../renderers";
+
 export default {
   components: { LeftArrowChevron, RightArrowChevron },
   directives: { ClickOutside },
@@ -28,22 +30,8 @@ export default {
     showingMonth() {
       return this.showingMonthNumber % 12;
     },
-    monthLabel() {
-      const month = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ][this.showingMonth];
-
+    showingMonthLabel() {
+      const month = renderMonth(this.showingMonth);
       const year = this.showingYear;
 
       return `${month} ${year}`;
@@ -109,7 +97,7 @@ export default {
       >
         <left-arrow-chevron class="date-picker__chevron" />
       </button>
-      <div class="date-picker__month-label">{{ monthLabel }}</div>
+      <div class="date-picker__month-label">{{ showingMonthLabel }}</div>
       <button class="date-picker__button" @click="handleNextClick">
         <right-arrow-chevron class="date-picker__chevron" />
       </button>
