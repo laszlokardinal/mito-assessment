@@ -4,8 +4,8 @@ import { ArrowLeft, ArrowRight, MitoLogo } from "../images";
 export default {
   components: { ArrowLeft, ArrowRight, MitoLogo },
   props: {
-    departureAirportName: { type: String, required: true },
-    destinationAirportName: { type: String, required: true }
+    departureStation: { type: String, required: true },
+    destinationStation: { type: String, required: true }
   }
 };
 </script>
@@ -16,7 +16,7 @@ export default {
     <div class="select-flight-header__departure-wrapper">
       <div class="select-flight-header__label">Leaving from</div>
       <div class="select-flight-header__airport">
-        {{ departureAirportName }}
+        {{ departureStation }}
       </div>
     </div>
     <div class="select-flight-header__arrows">
@@ -25,7 +25,7 @@ export default {
     </div>
     <div class="select-flight-header__destination-wrapper">
       <div class="select-flight-header__airport">
-        {{ destinationAirportName }}
+        {{ destinationStation }}
       </div>
     </div>
   </div>
