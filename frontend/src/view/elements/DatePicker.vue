@@ -16,7 +16,10 @@ export default {
     const now = new Date();
     const actualMonthNumber = now.getFullYear() * 12 + now.getMonth();
 
-    const showingDate = this.value ? new Date(this.value) : now;
+    const showingDate = this.value
+      ? new Date(this.value)
+      : new Date(this.minimumValue);
+
     const showingMonthNumber =
       showingDate.getFullYear() * 12 + showingDate.getMonth();
 
