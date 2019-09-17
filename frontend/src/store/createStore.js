@@ -1,5 +1,6 @@
 import Vuex from "vuex";
 import createLogger from "vuex/dist/logger";
+import { apiService } from "./services";
 
 const createStore = () => {
   const plugins = [];
@@ -10,6 +11,7 @@ const createStore = () => {
 
   return new Vuex.Store({
     modules: {
+      apiService
     },
     plugins
   });
