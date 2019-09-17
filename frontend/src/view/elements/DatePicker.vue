@@ -137,6 +137,7 @@ export default {
   position: absolute;
   top: calc(100% + 1px);
   width: 250px;
+  z-index: 1000;
 
   background: $white;
   box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);

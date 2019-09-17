@@ -37,6 +37,7 @@ export default {
   top: calc(100% + 1px);
   width: 250px;
   height: 250px;
+  z-index: 1000;
   overflow-y: scroll;
 
   background: $white;
