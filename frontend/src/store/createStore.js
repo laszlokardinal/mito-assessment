@@ -1,11 +1,30 @@
 import Vuex from "vuex";
 import createLogger from "vuex/dist/logger";
+import VuexPersistence from "vuex-persist";
 
 import { homeRoute } from "./routes";
 import { apiService } from "./services";
 
+import {
+  HOME__SET_DEPARTURE_IATA,
+  HOME__SET_DESTINATION_IATA
+} from "~/mutations.js";
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+  reducer: state => ({
+    homeRoute: {
+      departureIata: state.homeRoute.departureIata,
+      destinationIata: state.homeRoute.destinationIata
+    }
+  }),
+  filter: mutation =>
+    mutation.type === HOME__SET_DEPARTURE_IATA ||
+    mutation.type === HOME__SET_DESTINATION_IATA
+});
+
 const createStore = () => {
-  const plugins = [];
+  const plugins = [vuexLocal.plugin];
 
   if (process.env.NODE_ENV === "development") {
     plugins.push(createLogger());
