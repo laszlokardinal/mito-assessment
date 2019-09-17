@@ -7,6 +7,7 @@ export default {
   components: { CalendarIcon, DatePicker, InputField },
   props: {
     label: { type: String, required: true },
+    minimumValue: { type: String, required: true },
     value: { type: String },
     error: { type: String }
   },
@@ -51,6 +52,7 @@ export default {
     <date-picker
       v-if="datePickerOpened"
       :value="value"
+      :minimum-value="minimumValue"
       @change="handleDateChange"
       @close="handleClose"
     />

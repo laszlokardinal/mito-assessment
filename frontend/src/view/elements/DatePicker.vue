@@ -9,7 +9,8 @@ export default {
   components: { LeftArrowChevron, RightArrowChevron },
   directives: { ClickOutside },
   props: {
-    value: { type: String }
+    value: { type: String },
+    minimumValue: { type: String, required: true }
   },
   data() {
     const now = new Date();
@@ -19,9 +20,7 @@ export default {
     const showingMonthNumber =
       showingDate.getFullYear() * 12 + showingDate.getMonth();
 
-    const today = now.toISOString().slice(0, 10);
-
-    return { actualMonthNumber, showingMonthNumber, today };
+    return { actualMonthNumber, showingMonthNumber };
   },
   computed: {
     showingYear() {
@@ -37,7 +36,7 @@ export default {
       return `${month} ${year}`;
     },
     calendar() {
-      const { showingYear, showingMonth, today, value } = this;
+      const { showingYear, showingMonth, minimumValue, value } = this;
 
       const daysInTheMonth = new Date(showingYear, showingMonth, 0).getDate();
       const offset = (new Date(showingYear, showingMonth, 1).getDay() + 6) % 7;
@@ -55,7 +54,7 @@ export default {
 
         const selected = date === value;
 
-        const disabled = date < today;
+        const disabled = date < minimumValue;
 
         const weekday = (day + offset) % 7;
         const weekend = weekday === 6 || weekday === 0;
