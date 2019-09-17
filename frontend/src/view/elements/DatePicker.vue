@@ -26,29 +26,35 @@ export default {
     showingYear() {
       return Math.floor(this.showingMonthNumber / 12);
     },
-    showingMonth() {
+    showingMonthIndex() {
       return this.showingMonthNumber % 12;
     },
     showingMonthLabel() {
-      const month = renderMonth(this.showingMonth);
+      const month = renderMonth(this.showingMonthIndex);
       const year = this.showingYear;
 
       return `${month} ${year}`;
     },
     calendar() {
-      const { showingYear, showingMonth, minimumValue, value } = this;
+      const { showingYear, showingMonthIndex, minimumValue, value } = this;
 
-      const daysInTheMonth = new Date(showingYear, showingMonth, 0).getDate();
-      const offset = (new Date(showingYear, showingMonth, 1).getDay() + 6) % 7;
+      const daysInTheMonth = new Date(
+        showingYear,
+        showingMonthIndex + 1,
+        0
+      ).getDate();
+
+      const offset =
+        (new Date(showingYear, showingMonthIndex, 1).getDay() + 6) % 7;
 
       return new Array(6 * 7).fill(null).map((_, index) => {
-        if (index < offset || index > daysInTheMonth + offset) {
+        if (index < offset || index >= daysInTheMonth + offset) {
           return null;
         }
 
         const day = index - offset + 1;
 
-        const monthString = (showingMonth + 1).toString().padStart(2, 0);
+        const monthString = (showingMonthIndex + 1).toString().padStart(2, 0);
         const dayString = day.toString().padStart(2, 0);
         const date = `${showingYear}-${monthString}-${dayString}`;
 
