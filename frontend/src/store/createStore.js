@@ -1,5 +1,7 @@
 import Vuex from "vuex";
 import createLogger from "vuex/dist/logger";
+
+import { homeRoute } from "./routes";
 import { apiService } from "./services";
 
 const createStore = () => {
@@ -11,6 +13,7 @@ const createStore = () => {
 
   return new Vuex.Store({
     modules: {
+      homeRoute,
       apiService
     },
     plugins
