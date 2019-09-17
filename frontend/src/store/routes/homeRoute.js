@@ -1,23 +1,26 @@
-import { API__GET, HOME__ENTER, HOME__SUBMIT, HOME__LEAVE } from "~/actions.js";
+import Vue from "vue";
 
 import {
-  HOME__LOAD,
-  HOME__LOAD_SUCCESS,
-  HOME__LOAD_FAILURE,
-  HOME__RESET,
-  HOME__SET_ERROR,
-  HOME__RESET_ERRORS,
+  HOME__ENTER,
+  HOME__LEAVE,
   HOME__SET_DEPARTURE_IATA,
   HOME__SET_DESTINATION_IATA,
   HOME__SET_DEPARTURE_DATE,
-  HOME__SET_ARRIVAL_DATE
+  HOME__SET_ARRIVAL_DATE,
+  HOME__SUBMIT,
+  STATIONS__LOAD
+} from "~/actions.js";
+
+import {
+  HOME__SET_FIELDS,
+  HOME__SET_ERROR,
+  HOME__RESET_ERRORS,
+  HOME__RESET
 } from "~/mutations.js";
 
 const homeRoute = {
   state: {
-    stations: [],
     errors: {},
-    loading: false,
 
     departureIata: null,
     destinationIata: null,
@@ -25,26 +28,10 @@ const homeRoute = {
     arrivalDate: null
   },
   mutations: {
-    [HOME__LOAD](state) {
-      state.loading = true;
-      state.errors = {};
-      state.stations = [];
-    },
-
-    [HOME__LOAD_SUCCESS](state, payload) {
-      state.loading = false;
-      state.stations = payload.stations;
-    },
-
-    [HOME__LOAD_FAILURE](state, payload) {
-      state.loading = false;
-      state.errors = payload.errors;
-    },
-
-    [HOME__RESET](state) {
-      state.loading = false;
-      state.errors = {};
-      state.stations = [];
+    [HOME__SET_FIELDS](state, patch) {
+      Object.entries(patch).forEach(([key, value]) => {
+        Vue.set(state, key, value);
+      });
     },
 
     [HOME__SET_ERROR](state, { key, value }) {
@@ -55,13 +42,30 @@ const homeRoute = {
       state.errors = {};
     },
 
-    [HOME__SET_DEPARTURE_IATA](state, departureIata) {
-      const { stations, destinationIata } = state;
+    [HOME__RESET](state) {
+      state.departureIata = null;
+      state.destinationIata = null;
+      state.departureDate = null;
+      state.arrivalDate = null;
+      state.errors = {};
+    }
+  },
+  actions: {
+    async [HOME__ENTER]({ dispatch }) {
+      dispatch(STATIONS__LOAD);
+    },
 
-      state.departureIata = departureIata;
+    [HOME__LEAVE]({ commit }) {
+      commit(HOME__RESET);
+    },
+
+    [HOME__SET_DEPARTURE_IATA]({ state, commit, rootGetters }, departureIata) {
+      const { destinationIata } = state;
+
+      commit(HOME__SET_FIELDS, { departureIata });
 
       if (destinationIata) {
-        const selectedDepartureStation = stations.find(
+        const selectedDepartureStation = rootGetters.stations.find(
           ({ iata }) => iata === departureIata
         );
 
@@ -70,38 +74,25 @@ const homeRoute = {
         );
 
         if (!connection) {
-          state.destinationIata = null;
+          commit(HOME__SET_FIELDS, { destinationIata: null });
         }
       }
     },
 
-    [HOME__SET_DESTINATION_IATA](state, destinationIata) {
-      state.destinationIata = destinationIata;
+    [HOME__SET_DESTINATION_IATA]({ commit }, destinationIata) {
+      commit(HOME__SET_FIELDS, { destinationIata });
     },
 
-    [HOME__SET_DEPARTURE_DATE](state, departureDate) {
+    [HOME__SET_DEPARTURE_DATE]({ state, commit }, departureDate) {
       state.departureDate = departureDate;
 
       if (state.departureDate >= state.arrivalDate) {
-        state.arrivalDate = null;
+        commit(HOME__SET_FIELDS, { arrivalDate: null });
       }
     },
 
-    [HOME__SET_ARRIVAL_DATE](state, arrivalDate) {
-      state.arrivalDate = arrivalDate;
-    }
-  },
-  actions: {
-    async [HOME__ENTER]({ dispatch, commit }) {
-      try {
-        commit(HOME__LOAD);
-
-        const { data } = await dispatch(API__GET, { path: "/asset/stations" });
-
-        commit(HOME__LOAD_SUCCESS, { stations: data });
-      } catch (e) {
-        commit(HOME__LOAD_FAILURE, e);
-      }
+    [HOME__SET_ARRIVAL_DATE]({ commit }, arrivalDate) {
+      commit(HOME__SET_FIELDS, { arrivalDate });
     },
 
     async [HOME__SUBMIT]({ state, commit }) {
@@ -158,23 +149,19 @@ const homeRoute = {
       }
 
       return { path: "/select-flights", query };
-    },
-
-    [HOME__LEAVE]({ commit }) {
-      commit(HOME__RESET);
     }
   },
   getters: {
-    departureStations: state => {
-      return state.stations.map(({ iata, shortName }) => ({
+    homeDepartureStations: (state, idx1, idx2, rootGetters) => {
+      return rootGetters.stations.map(({ iata, shortName }) => ({
         id: iata,
         title: shortName
       }));
     },
 
-    destinationStations: state => {
+    homeDestinationStations: (state, idx1, idx2, rootGetters) => {
       if (state.departureIata) {
-        const selectedDepartureStation = state.stations.find(
+        const selectedDepartureStation = rootGetters.stations.find(
           ({ iata }) => iata === state.departureIata
         );
 
@@ -185,7 +172,7 @@ const homeRoute = {
         return selectedDepartureStation.connections
           .filter(({ iata }) => iata)
           .map(connection => {
-            const stationWithMatchingIata = state.stations.find(
+            const stationWithMatchingIata = rootGetters.stations.find(
               station => station.iata === connection.iata
             );
 
@@ -198,21 +185,26 @@ const homeRoute = {
           });
       }
 
-      return state.stations.map(({ iata, shortName }) => ({
+      return rootGetters.stations.map(({ iata, shortName }) => ({
         id: iata,
         title: shortName
       }));
     },
 
-    departureIata: state => state.departureIata,
+    homeDepartureIata: state => state.departureIata,
 
-    destinationIata: state => state.destinationIata,
+    homeDestinationIata: state => state.destinationIata,
 
-    departureDate: state => state.departureDate,
+    homeDepartureDate: state => state.departureDate,
 
-    arrivalDate: state => state.arrivalDate,
+    homeArrivalDate: state => state.arrivalDate,
 
-    errors: state => state.errors
+    homeLoading: (idx1, idx2, idx3, rootGetters) => rootGetters.stationsLoading,
+
+    homeErrors: (state, idx1, idx2, rootGetters) => ({
+      ...state.errors,
+      ...rootGetters.stationErrors
+    })
   }
 };
 

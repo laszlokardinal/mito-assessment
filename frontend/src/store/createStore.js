@@ -3,12 +3,9 @@ import createLogger from "vuex/dist/logger";
 import VuexPersistence from "vuex-persist";
 
 import { homeRoute } from "./routes";
-import { apiService } from "./services";
+import { apiService, stationsService } from "./services";
 
-import {
-  HOME__SET_DEPARTURE_IATA,
-  HOME__SET_DESTINATION_IATA
-} from "~/mutations.js";
+import { HOME__SET_FIELDS } from "~/mutations.js";
 
 const vuexLocal = new VuexPersistence({
   storage: window.localStorage,
@@ -18,9 +15,7 @@ const vuexLocal = new VuexPersistence({
       destinationIata: state.homeRoute.destinationIata
     }
   }),
-  filter: mutation =>
-    mutation.type === HOME__SET_DEPARTURE_IATA ||
-    mutation.type === HOME__SET_DESTINATION_IATA
+  filter: mutation => mutation.type === HOME__SET_FIELDS
 });
 
 const createStore = () => {
@@ -33,7 +28,8 @@ const createStore = () => {
   return new Vuex.Store({
     modules: {
       homeRoute,
-      apiService
+      apiService,
+      stationsService
     },
     plugins
   });

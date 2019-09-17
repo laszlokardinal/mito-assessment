@@ -1,5 +1,5 @@
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 import { SubmitButton } from "../elements";
 
@@ -10,13 +10,15 @@ import {
   HomeContainer
 } from "../components";
 
-import { HOME__ENTER, HOME__LEAVE, HOME__SUBMIT } from "~/actions.js";
 import {
+  HOME__ENTER,
+  HOME__LEAVE,
   HOME__SET_DEPARTURE_IATA,
   HOME__SET_DESTINATION_IATA,
   HOME__SET_DEPARTURE_DATE,
-  HOME__SET_ARRIVAL_DATE
-} from "~/mutations";
+  HOME__SET_ARRIVAL_DATE,
+  HOME__SUBMIT
+} from "~/actions.js";
 
 export default {
   components: {
@@ -53,18 +55,19 @@ export default {
 
       return today;
     },
-    ...mapGetters([
-      "departureStations",
-      "destinationStations",
-      "departureIata",
-      "destinationIata",
-      "departureDate",
-      "arrivalDate",
-      "errors"
-    ])
+    ...mapGetters({
+      departureStations: "homeDepartureStations",
+      destinationStations: "homeDestinationStations",
+      departureIata: "homeDepartureIata",
+      destinationIata: "homeDestinationIata",
+      departureDate: "homeDepartureDate",
+      arrivalDate: "homeArrivalDate",
+      loading: "homeLoading",
+      errors: "homeErrors"
+    })
   },
   methods: {
-    ...mapMutations({
+    ...mapActions({
       handleDepartureIataChange: HOME__SET_DEPARTURE_IATA,
       handleDestinationIataChange: HOME__SET_DESTINATION_IATA,
       handleDepartureDateChange: HOME__SET_DEPARTURE_DATE,
