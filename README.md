@@ -3,6 +3,7 @@
 ## Sitebuild
 
 Run `npm install` in the sitebuild folder to install development dependencies.
+
 Run `npm run dev` to serve the following pages on the port 1234:
 * [home.html](http://localhost:1234/home.html)
 * [datepicker-opened.html](http://localhost:1234/datepicker-opened.html)
@@ -12,3 +13,10 @@ Run `npm run dev` to serve the following pages on the port 1234:
 * [select-flight-03.html](http://localhost:1234/select-flight-03.html)
 * [select-flight-04.html](http://localhost:1234/select-flight-04.html)
 
+## Frontend
+
+Run `npm install` in the frontend folder to install development dependencies.
+
+Copy `.env.sample` to `.env`
+
+Run `npm run dev` to run the app (by default on http://localhost:3000/)
