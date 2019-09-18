@@ -17,7 +17,7 @@ import {
   HOME__SET_DEPARTURE_IATA,
   HOME__SET_DESTINATION_IATA,
   HOME__SET_DEPARTURE_DATE,
-  HOME__SET_ARRIVAL_DATE,
+  HOME__SET_RETURN_DATE,
   HOME__SUBMIT
 } from "~/actions.js";
 
@@ -45,7 +45,7 @@ export default {
     };
   },
   computed: {
-    arrivalMinimumDate() {
+    returnMinimumDate() {
       const { departureDate, today } = this;
 
       if (departureDate) {
@@ -63,7 +63,7 @@ export default {
       departureIata: "homeDepartureIata",
       destinationIata: "homeDestinationIata",
       departureDate: "homeDepartureDate",
-      arrivalDate: "homeArrivalDate",
+      returnDate: "homeReturnDate",
       loading: "homeLoading",
       errors: "homeErrors"
     })
@@ -73,7 +73,7 @@ export default {
       handleDepartureIataChange: HOME__SET_DEPARTURE_IATA,
       handleDestinationIataChange: HOME__SET_DESTINATION_IATA,
       handleDepartureDateChange: HOME__SET_DEPARTURE_DATE,
-      handleArrivalDateChange: HOME__SET_ARRIVAL_DATE
+      handleReturnDateChange: HOME__SET_RETURN_DATE
     }),
     async handleSubmit() {
       const route = await this.$store.dispatch(HOME__SUBMIT);
@@ -114,10 +114,10 @@ export default {
         />
         <date-input-field
           label="Return"
-          :minimum-value="arrivalMinimumDate"
-          :value="arrivalDate"
-          :error="errors.arrivalDate"
-          @change="handleArrivalDateChange"
+          :minimum-value="returnMinimumDate"
+          :value="returnDate"
+          :error="errors.returnDate"
+          @change="handleReturnDateChange"
         />
         <submit-button label="Search" @click="handleSubmit" />
       </home-card>

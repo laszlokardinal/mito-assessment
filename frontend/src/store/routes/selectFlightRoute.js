@@ -4,7 +4,7 @@ import {
   API__GET,
   SELECT_FLIGHT__ENTER,
   SELECT_FLIGHT__SET_DEPARTURE_DATE,
-  SELECT_FLIGHT__SET_ARRIVAL_DATE,
+  SELECT_FLIGHT__SET_RETURN_DATE,
   SELECT_FLIGHT__SET_SELECTED_OUTBOUND_FLIGHT,
   SELECT_FLIGHT__SET_SELECTED_INBOUND_FLIGHT,
   SELECT_FLIGHT__LEAVE,
@@ -37,7 +37,7 @@ const selectFlightRoute = {
     departureIata: null,
     destinationIata: null,
     departureDate: null,
-    arrivalDate: null,
+    returnDate: null,
 
     showCheckoutModal: false
   },
@@ -84,7 +84,7 @@ const selectFlightRoute = {
       state.departureIata = null;
       state.destinationIata = null;
       state.departureDate = null;
-      state.arrivalDate = null;
+      state.returnDate = null;
       state.showCheckoutModal = false;
     }
   },
@@ -94,7 +94,7 @@ const selectFlightRoute = {
         departureIata,
         destinationIata,
         departureDate,
-        arrivalDate
+        returnDate
       } = payload;
 
       dispatch(STATIONS__LOAD);
@@ -103,8 +103,8 @@ const selectFlightRoute = {
 
       dispatch(SELECT_FLIGHT__SET_DEPARTURE_DATE, departureDate);
 
-      if (arrivalDate) {
-        dispatch(SELECT_FLIGHT__SET_ARRIVAL_DATE, arrivalDate);
+      if (returnDate) {
+        dispatch(SELECT_FLIGHT__SET_RETURN_DATE, returnDate);
       }
     },
 
@@ -138,13 +138,13 @@ const selectFlightRoute = {
       }
     },
 
-    async [SELECT_FLIGHT__SET_ARRIVAL_DATE](
+    async [SELECT_FLIGHT__SET_RETURN_DATE](
       { state, commit, dispatch },
-      arrivalDate
+      returnDate
     ) {
       const { departureIata, destinationIata } = state;
 
-      commit(SELECT_FLIGHT__SET_FIELDS, { arrivalDate });
+      commit(SELECT_FLIGHT__SET_FIELDS, { returnDate });
 
       try {
         commit(SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_START);
@@ -154,7 +154,7 @@ const selectFlightRoute = {
           params: {
             departureStation: destinationIata,
             arrivalStation: departureIata,
-            date: arrivalDate
+            date: returnDate
           }
         });
 
@@ -204,13 +204,13 @@ const selectFlightRoute = {
 
       commit(SELECT_FLIGHT__SET_FIELDS, patch);
 
-      if (state.arrivalDate <= outboundDate) {
+      if (state.returnDate <= outboundDate) {
         const newReturnDate = new Date(outboundDate);
         newReturnDate.setDate(newReturnDate.getDate() + 1);
 
         const newReturnDateString = newReturnDate.toISOString().slice(0, 10);
 
-        dispatch(SELECT_FLIGHT__SET_ARRIVAL_DATE, newReturnDateString);
+        dispatch(SELECT_FLIGHT__SET_RETURN_DATE, newReturnDateString);
       }
     },
 
@@ -254,7 +254,7 @@ const selectFlightRoute = {
       rootGetters.stationsLoading,
 
     selectFlightDepartureDate: state => state.departureDate,
-    selectFlightArrivalDate: state => state.arrivalDate,
+    selectFlightReturnDate: state => state.returnDate,
 
     selectFlightOutboundFlights: state => state.outboundFlights,
 

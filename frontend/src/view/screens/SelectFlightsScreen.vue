@@ -13,7 +13,7 @@ import {
   SELECT_FLIGHT__ENTER,
   SELECT_FLIGHT__LEAVE,
   SELECT_FLIGHT__SET_DEPARTURE_DATE,
-  SELECT_FLIGHT__SET_ARRIVAL_DATE,
+  SELECT_FLIGHT__SET_RETURN_DATE,
   SELECT_FLIGHT__SET_SELECTED_OUTBOUND_FLIGHT,
   SELECT_FLIGHT__SET_SELECTED_INBOUND_FLIGHT,
   SELECT_FLIGHT__SUBMIT,
@@ -37,7 +37,7 @@ export default {
       };
 
       if ("return" in to.query) {
-        payload.arrivalDate = to.query["return"];
+        payload.returnDate = to.query["return"];
       }
 
       vm.$store.dispatch(SELECT_FLIGHT__ENTER, payload);
@@ -53,7 +53,7 @@ export default {
     };
   },
   computed: {
-    arrivalMinimumDate() {
+    returnMinimumDate() {
       const { selectedOutboundFlight, today } = this;
 
       const minimumDate = selectedOutboundFlight
@@ -68,7 +68,7 @@ export default {
     ...mapGetters({
       loading: "selectFlightLoading",
       departureDate: "selectFlightDepartureDate",
-      arrivalDate: "selectFlightArrivalDate",
+      returnDate: "selectFlightReturnDate",
       outboundFlights: "selectFlightOutboundFlights",
       inboundFlights: "selectFlightInboundFlights",
       selectedOutboundFlight: "selectFlightSelectedOutboundFlight",
@@ -82,7 +82,7 @@ export default {
   methods: {
     ...mapActions({
       handleDepartureDateChange: SELECT_FLIGHT__SET_DEPARTURE_DATE,
-      handleArrivalDateChange: SELECT_FLIGHT__SET_ARRIVAL_DATE,
+      handleReturnDateChange: SELECT_FLIGHT__SET_RETURN_DATE,
       handleOutboundFlightChange: SELECT_FLIGHT__SET_SELECTED_OUTBOUND_FLIGHT,
       handleInboundFlightChange: SELECT_FLIGHT__SET_SELECTED_INBOUND_FLIGHT,
       handleSubmit: SELECT_FLIGHT__SUBMIT,
@@ -126,9 +126,9 @@ export default {
         :selected-fare-sell-key="
           selectedInboundFlight ? selectedInboundFlight.fareSellKey : null
         "
-        :departure-date="arrivalDate"
-        :minimum-departure-date="arrivalMinimumDate"
-        @date-change="handleArrivalDateChange"
+        :departure-date="returnDate"
+        :minimum-departure-date="returnMinimumDate"
+        @date-change="handleReturnDateChange"
         @flight-change="handleInboundFlightChange"
       />
     </select-flight-layout>

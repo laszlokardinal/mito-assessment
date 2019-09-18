@@ -10,11 +10,11 @@ const renderFlightTimeInterval = (departureTime, arrivalTime) => {
     useAbbreviations: true
   });
 
-  const arrivalDate = new Date(arrivalTime);
+  const returnDate = new Date(arrivalTime);
 
   const arrivalTimeString = renderTime(arrivalTime);
 
-  const arrivalDay = renderDay(arrivalDate.getDay(), {
+  const arrivalDay = renderDay(returnDate.getDay(), {
     useAbbreviations: true
   });
 

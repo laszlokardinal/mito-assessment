@@ -6,7 +6,7 @@ import {
   HOME__SET_DEPARTURE_IATA,
   HOME__SET_DESTINATION_IATA,
   HOME__SET_DEPARTURE_DATE,
-  HOME__SET_ARRIVAL_DATE,
+  HOME__SET_RETURN_DATE,
   HOME__SUBMIT,
   STATIONS__LOAD
 } from "~/actions.js";
@@ -25,7 +25,7 @@ const homeRoute = {
     departureIata: null,
     destinationIata: null,
     departureDate: null,
-    arrivalDate: null
+    returnDate: null
   },
   mutations: {
     [HOME__SET_FIELDS](state, patch) {
@@ -46,7 +46,7 @@ const homeRoute = {
       state.departureIata = null;
       state.destinationIata = null;
       state.departureDate = null;
-      state.arrivalDate = null;
+      state.returnDate = null;
       state.errors = {};
     }
   },
@@ -86,13 +86,13 @@ const homeRoute = {
     [HOME__SET_DEPARTURE_DATE]({ state, commit }, departureDate) {
       state.departureDate = departureDate;
 
-      if (state.departureDate >= state.arrivalDate) {
-        commit(HOME__SET_FIELDS, { arrivalDate: null });
+      if (state.departureDate >= state.returnDate) {
+        commit(HOME__SET_FIELDS, { returnDate: null });
       }
     },
 
-    [HOME__SET_ARRIVAL_DATE]({ commit }, arrivalDate) {
-      commit(HOME__SET_FIELDS, { arrivalDate });
+    [HOME__SET_RETURN_DATE]({ commit }, returnDate) {
+      commit(HOME__SET_FIELDS, { returnDate });
     },
 
     async [HOME__SUBMIT]({ state, commit }) {
@@ -102,7 +102,7 @@ const homeRoute = {
         departureIata,
         destinationIata,
         departureDate,
-        arrivalDate
+        returnDate
       } = state;
 
       let erroneous = false;
@@ -144,8 +144,8 @@ const homeRoute = {
         departure: departureDate
       };
 
-      if (arrivalDate) {
-        query["return"] = arrivalDate;
+      if (returnDate) {
+        query["return"] = returnDate;
       }
 
       return { path: "/select-flights", query };
@@ -197,7 +197,7 @@ const homeRoute = {
 
     homeDepartureDate: state => state.departureDate,
 
-    homeArrivalDate: state => state.arrivalDate,
+    homeReturnDate: state => state.returnDate,
 
     homeLoading: (idx1, idx2, idx3, rootGetters) => rootGetters.stationsLoading,
 
