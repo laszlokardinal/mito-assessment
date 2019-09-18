@@ -197,7 +197,7 @@ const selectFlightRoute = {
           .toISOString()
           .slice(0, 10);
 
-        if (inboundDate < outboundDate) {
+        if (inboundDate <= outboundDate) {
           patch.selectedInboundTicket = null;
         }
       }
