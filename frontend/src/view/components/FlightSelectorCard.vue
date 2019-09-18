@@ -10,6 +10,7 @@ export default {
     flights: { type: Array, required: true },
     selectedFareSellKey: { type: String },
     departureDate: { type: String, required: true },
+    minimumDepartureDate: { type: String, required: true },
     inbound: { type: Boolean, default: false }
   },
   methods: {
@@ -36,16 +37,17 @@ export default {
       </div>
     </div>
     <div class="flight-selector-card__body">
-      <flight-date-selector
-        :departure-date="departureDate"
-        @date-change="handleDateChange"
-      />
-      <flight-ticket-selector
-        :flights="flights"
-        :selected-fare-sell-key="selectedFareSellKey"
-        @select-ticket="handleSelectTicket"
-        @date-change="handleDateChange"
-      />
+        <flight-date-selector
+          :departure-date="departureDate"
+          :minimum-departure-date="minimumDepartureDate"
+          @date-change="handleDateChange"
+        />
+        <flight-ticket-selector
+          :flights="flights"
+          :selected-fare-sell-key="selectedFareSellKey"
+          @select-ticket="handleSelectTicket"
+          @date-change="handleDateChange"
+        />
     </div>
   </div>
 </template>
