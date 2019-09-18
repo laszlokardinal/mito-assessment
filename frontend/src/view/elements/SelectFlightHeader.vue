@@ -12,7 +12,9 @@ export default {
 
 <template>
   <div class="select-flight-header__wrapper">
-    <mito-logo class="select-flight-header__logo" />
+    <router-link class="select-flight-header__link" to="/">
+      <mito-logo class="select-flight-header__logo" />
+    </router-link>
     <div class="select-flight-header__departure-wrapper">
       <div class="select-flight-header__label">Leaving from</div>
       <div class="select-flight-header__airport">
@@ -40,6 +42,10 @@ export default {
   background-color: $primary;
 
   display: flex;
+}
+
+.select-flight-header__link {
+  outline: 0;
 }
 
 .select-flight-header__logo {
