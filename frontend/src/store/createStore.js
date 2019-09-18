@@ -2,7 +2,7 @@ import Vuex from "vuex";
 import createLogger from "vuex/dist/logger";
 import VuexPersistence from "vuex-persist";
 
-import { homeRoute } from "./routes";
+import { homeRoute, selectFlightRoute } from "./routes";
 import { apiService, stationsService } from "./services";
 
 import { HOME__SET_FIELDS } from "~/mutations.js";
@@ -28,6 +28,7 @@ const createStore = () => {
   return new Vuex.Store({
     modules: {
       homeRoute,
+      selectFlightRoute,
       apiService,
       stationsService
     },
