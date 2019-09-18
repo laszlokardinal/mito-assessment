@@ -5,7 +5,8 @@ import { renderDate } from "../renderers";
 export default {
   components: { LeftArrowChevron, RightArrowChevron },
   props: {
-    departureDate: { type: String, required: true }
+    departureDate: { type: String, required: true },
+    minimumDepartureDate: { type: String, required: true }
   },
   computed: {
     previousDay() {
@@ -28,6 +29,16 @@ export default {
         displayDayAbbreviations: true,
         omitYear: true
       });
+    },
+    previousButtonDisabled() {
+      const { departureDate, minimumDepartureDate } = this;
+
+      const previousDayDate = new Date(departureDate);
+      previousDayDate.setDate(previousDayDate.getDate() - 1);
+
+      const previousDayISODate = previousDayDate.toISOString().slice(0, 10);
+
+      return previousDayISODate < minimumDepartureDate;
     }
   },
   methods: {
@@ -50,7 +61,11 @@ export default {
 <template>
   <div class="flight-date-selector__wrapper">
     <button
-      class="flight-date-selector__button"
+      :class="{
+        'flight-date-selector__button': true,
+        'flight-date-selector__button--disabled': previousButtonDisabled
+      }"
+      :disabled="previousButtonDisabled"
       @click="handlePreviousDayClick"
     >
       <div class="flight-date-selector__caret">
@@ -94,10 +109,25 @@ export default {
   outline: 0;
   border: 0;
 
+  color: $gray;
+
   cursor: pointer;
 
   display: flex;
   align-items: center;
+}
+
+.flight-date-selector__button:hover {
+  color: $hover-gray-dark;
+}
+
+.flight-date-selector__button--disabled,
+.flight-date-selector__button--disabled:hover {
+  color: $disabled-gray;
+}
+
+.flight-date-selector__button--disabled path {
+  fill: $disabled-gray;
 }
 
 .flight-date-selector__button--align-right {
@@ -123,7 +153,6 @@ export default {
   font-size: 13px;
   line-height: 15px;
   text-transform: uppercase;
-  color: $gray;
 
   transition: background-color 50ms ease;
 
@@ -142,9 +171,5 @@ export default {
 
   display: flex;
   align-items: center;
-}
-
-.flight-date-selector__button:hover > .flight-date-selector__label {
-  color: $hover-gray-dark;
 }
 </style>
