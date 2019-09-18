@@ -10,7 +10,7 @@ export default {
     flights: { type: Array, required: true },
     selectedFareSellKey: { type: String },
     departureDate: { type: String, required: true },
-    outbound: { type: Boolean, default: false }
+    inbound: { type: Boolean, default: false }
   },
   methods: {
     handleSelectTicket(fareSellKey) {
@@ -27,7 +27,7 @@ export default {
   <div class="flight-selector-card__wrapper">
     <div class="flight-selector-card__header">
       <div class="flight-selector-card__title">
-        {{ outbound ? "Inbound" : "Outbound" }}
+        {{ inbound ? "Inbound" : "Outbound" }}
       </div>
       <div class="flight-selector-card__airports">
         {{ departureStation }}
