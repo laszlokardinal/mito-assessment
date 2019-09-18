@@ -1,24 +1,51 @@
 <script>
-import { FlightDateSelector, FlightTicketSelector } from "../elements";
+import {
+  SubmitButton,
+  FlightDateSelector,
+  FlightTicketSelector
+} from "../elements";
+import { DateInputField } from "../components";
 import { CardArrowRight } from "../images";
 
 export default {
-  components: { FlightDateSelector, FlightTicketSelector, CardArrowRight },
+  components: {
+    SubmitButton,
+    FlightDateSelector,
+    FlightTicketSelector,
+    DateInputField,
+    CardArrowRight
+  },
   props: {
     departureStation: { type: String, required: true },
     destinationStation: { type: String, required: true },
     flights: { type: Array, required: true },
     selectedFareSellKey: { type: String },
-    departureDate: { type: String, required: true },
+    departureDate: { type: String },
     minimumDepartureDate: { type: String, required: true },
     inbound: { type: Boolean, default: false }
   },
+  data() {
+    return { dateInputSelectedDate: null, dateInputError: null };
+  },
   methods: {
     handleSelectTicket(fareSellKey) {
-      this.$emit("select-ticket", fareSellKey);
+      this.$emit("ticket-change", fareSellKey);
     },
     handleDateChange(newDate) {
       this.$emit("date-change", newDate);
+    },
+    handleDateInputChange(newDate) {
+      this.dateInputSelectedDate = newDate;
+    },
+    handleSubmit() {
+      if (this.dateInputSelectedDate) {
+        this.handleDateChange(this.dateInputSelectedDate);
+
+        this.dateInputSelectedDate = null;
+        this.dateInputError = null;
+      } else {
+        this.dateInputError = "Please select return";
+      }
     }
   }
 };
@@ -37,17 +64,37 @@ export default {
       </div>
     </div>
     <div class="flight-selector-card__body">
+      <template v-if="departureDate">
         <flight-date-selector
           :departure-date="departureDate"
           :minimum-departure-date="minimumDepartureDate"
           @date-change="handleDateChange"
         />
         <flight-ticket-selector
+          v-if="flights.length"
           :flights="flights"
           :selected-fare-sell-key="selectedFareSellKey"
           @select-ticket="handleSelectTicket"
           @date-change="handleDateChange"
         />
+        <div class="flight-selector-card__placeholder" v-else>
+          Sorry, could not find flights on this day
+        </div>
+      </template>
+      <template v-else>
+        <div class="flight-selector-card__form-wrapper">
+          <date-input-field
+            label="Return"
+            :minimum-value="minimumDepartureDate"
+            :value="dateInputSelectedDate"
+            :error="dateInputError"
+            @change="handleDateInputChange"
+          />
+          <div class="flight-selector-card__form-button ">
+            <submit-button full-width label="Search" @click="handleSubmit" />
+          </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -136,5 +183,38 @@ export default {
 
 .flight-selector-card__body {
   background-color: $white;
+}
+
+.flight-selector-card__placeholder {
+  padding: 45px 15px 60px 15px;
+
+  border-top: 1px solid $border-gray;
+  background-color: $white;
+
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 20px;
+  color: $gray;
+
+  text-align: center;
+}
+
+.flight-selector-card__form-wrapper {
+  padding: 40px 10px 0px 10px;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flight-selector-card__form-button {
+  width: 250px;
+  margin-bottom: 50px;
+
+  @media (min-width: 600px) {
+    width: 125px;
+  }
 }
 </style>
