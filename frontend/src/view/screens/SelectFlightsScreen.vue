@@ -5,6 +5,7 @@ import {
   CheckoutModal,
   FlightsCard,
   FlightSelectorCard,
+  LoadingIndicator,
   SelectFlightLayout
 } from "../components";
 
@@ -24,6 +25,7 @@ export default {
     CheckoutModal,
     FlightsCard,
     FlightSelectorCard,
+    LoadingIndicator,
     SelectFlightLayout
   },
   beforeRouteEnter(to, from, next) {
@@ -92,6 +94,7 @@ export default {
 
 <template>
   <fragment>
+    <loading-indicator :loading="loading" />
     <select-flight-layout
       :departure-station="departureStationName"
       :destination-station="destinationStationName"

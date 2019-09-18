@@ -7,7 +7,8 @@ import {
   DateInputField,
   DropdownInputField,
   HomeCard,
-  HomeContainer
+  HomeContainer,
+  LoadingIndicator
 } from "../components";
 
 import {
@@ -26,7 +27,8 @@ export default {
     DateInputField,
     DropdownInputField,
     HomeCard,
-    HomeContainer
+    HomeContainer,
+    LoadingIndicator
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
@@ -85,39 +87,42 @@ export default {
 </script>
 
 <template>
-  <home-container>
-    <home-card>
-      <dropdown-input-field
-        label="Origin"
-        :options="departureStations"
-        :value="departureIata"
-        :error="errors.departureIata"
-        @change="handleDepartureIataChange"
-      />
-      <dropdown-input-field
-        label="Destination"
-        :options="destinationStations"
-        :value="destinationIata"
-        :error="errors.destinationIata"
-        @change="handleDestinationIataChange"
-      />
-      <date-input-field
-        label="Departure"
-        :minimum-value="today"
-        :value="departureDate"
-        :error="errors.departureDate"
-        @change="handleDepartureDateChange"
-      />
-      <date-input-field
-        label="Return"
-        :minimum-value="arrivalMinimumDate"
-        :value="arrivalDate"
-        :error="errors.arrivalDate"
-        @change="handleArrivalDateChange"
-      />
-      <submit-button label="Search" @click="handleSubmit" />
-    </home-card>
-  </home-container>
+  <fragment>
+    <loading-indicator :loading="loading" />
+    <home-container>
+      <home-card>
+        <dropdown-input-field
+          label="Origin"
+          :options="departureStations"
+          :value="departureIata"
+          :error="errors.departureIata"
+          @change="handleDepartureIataChange"
+        />
+        <dropdown-input-field
+          label="Destination"
+          :options="destinationStations"
+          :value="destinationIata"
+          :error="errors.destinationIata"
+          @change="handleDestinationIataChange"
+        />
+        <date-input-field
+          label="Departure"
+          :minimum-value="today"
+          :value="departureDate"
+          :error="errors.departureDate"
+          @change="handleDepartureDateChange"
+        />
+        <date-input-field
+          label="Return"
+          :minimum-value="arrivalMinimumDate"
+          :value="arrivalDate"
+          :error="errors.arrivalDate"
+          @change="handleArrivalDateChange"
+        />
+        <submit-button label="Search" @click="handleSubmit" />
+      </home-card>
+    </home-container>
+  </fragment>
 </template>
 
 <style></style>

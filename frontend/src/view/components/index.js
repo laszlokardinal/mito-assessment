@@ -5,4 +5,5 @@ export FlightsCard from "./FlightsCard.vue";
 export FlightSelectorCard from "./FlightSelectorCard.vue";
 export HomeCard from "./HomeCard.vue";
 export HomeContainer from "./HomeContainer.vue";
+export LoadingIndicator from "./LoadingIndicator.vue";
 export SelectFlightLayout from "./SelectFlightLayout.vue";
