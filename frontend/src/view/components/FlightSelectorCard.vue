@@ -28,8 +28,8 @@ export default {
     return { dateInputSelectedDate: null, dateInputError: null };
   },
   methods: {
-    handleSelectTicket(fareSellKey) {
-      this.$emit("ticket-change", fareSellKey);
+    handleFlightChange(fareSellKey) {
+      this.$emit("flight-change", fareSellKey);
     },
     handleDateChange(newDate) {
       this.$emit("date-change", newDate);
@@ -74,7 +74,7 @@ export default {
           v-if="flights.length"
           :flights="flights"
           :selected-fare-sell-key="selectedFareSellKey"
-          @select-ticket="handleSelectTicket"
+          @flight-change="handleFlightChange"
           @date-change="handleDateChange"
         />
         <div class="flight-selector-card__placeholder" v-else>

@@ -5,8 +5,8 @@ import {
   SELECT_FLIGHT__ENTER,
   SELECT_FLIGHT__SET_DEPARTURE_DATE,
   SELECT_FLIGHT__SET_ARRIVAL_DATE,
-  SELECT_FLIGHT__SET_SELECTED_OUTBOUND_TICKET,
-  SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET,
+  SELECT_FLIGHT__SET_SELECTED_OUTBOUND_FLIGHT,
+  SELECT_FLIGHT__SET_SELECTED_INBOUND_FLIGHT,
   SELECT_FLIGHT__LEAVE,
   SELECT_FLIGHT__SUBMIT,
   SELECT_FLIGHT__CLOSE_MODAL,
@@ -14,12 +14,12 @@ import {
 } from "~/actions.js";
 
 import {
-  SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_START,
-  SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_SUCCESS,
-  SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_FAILURE,
-  SELECT_FLIGHT__LOAD_INBOUND_TICKETS_START,
-  SELECT_FLIGHT__LOAD_INBOUND_TICKETS_SUCCESS,
-  SELECT_FLIGHT__LOAD_INBOUND_TICKETS_FAILURE,
+  SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_START,
+  SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_SUCCESS,
+  SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_FAILURE,
+  SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_START,
+  SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_SUCCESS,
+  SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_FAILURE,
   SELECT_FLIGHT__SET_FIELDS,
   SELECT_FLIGHT__RESET
 } from "~/mutations";
@@ -28,11 +28,11 @@ const selectFlightRoute = {
   state: {
     outboundRequestLoading: false,
     inboundRequestLoading: false,
-    outboundTickets: [],
-    inboundTickets: [],
+    outboundFlights: [],
+    inboundFlights: [],
 
-    selectedOutboundTicket: null,
-    selectedInboundTicket: null,
+    selectedOutboundFlight: null,
+    selectedInboundFlight: null,
 
     departureIata: null,
     destinationIata: null,
@@ -42,29 +42,29 @@ const selectFlightRoute = {
     showCheckoutModal: false
   },
   mutations: {
-    [SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_START](state) {
+    [SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_START](state) {
       state.outboundRequestLoading = true;
     },
 
-    [SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_SUCCESS](state, payload) {
+    [SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_SUCCESS](state, payload) {
       state.outboundRequestLoading = false;
-      state.outboundTickets = payload.tickets;
+      state.outboundFlights = payload.flights;
     },
 
-    [SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_FAILURE](state) {
+    [SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_FAILURE](state) {
       state.outboundRequestLoading = false;
     },
 
-    [SELECT_FLIGHT__LOAD_INBOUND_TICKETS_START](state) {
+    [SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_START](state) {
       state.inboundRequestLoading = true;
     },
 
-    [SELECT_FLIGHT__LOAD_INBOUND_TICKETS_SUCCESS](state, payload) {
+    [SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_SUCCESS](state, payload) {
       state.inboundRequestLoading = false;
-      state.inboundTickets = payload.tickets;
+      state.inboundFlights = payload.flights;
     },
 
-    [SELECT_FLIGHT__LOAD_INBOUND_TICKETS_FAILURE](state) {
+    [SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_FAILURE](state) {
       state.inboundRequestLoading = false;
     },
 
@@ -77,10 +77,10 @@ const selectFlightRoute = {
     [SELECT_FLIGHT__RESET](state) {
       state.outboundRequestLoading = false;
       state.inboundRequestLoading = false;
-      state.outboundTickets = [];
-      state.inboundTickets = [];
-      state.selectedOutboundTicket = null;
-      state.selectedInboundTicket = null;
+      state.outboundFlights = [];
+      state.inboundFlights = [];
+      state.selectedOutboundFlight = null;
+      state.selectedInboundFlight = null;
       state.departureIata = null;
       state.destinationIata = null;
       state.departureDate = null;
@@ -121,7 +121,7 @@ const selectFlightRoute = {
       commit(SELECT_FLIGHT__SET_FIELDS, { departureDate });
 
       try {
-        commit(SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_START);
+        commit(SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_START);
 
         const { data } = await dispatch(API__GET, {
           path: "/search",
@@ -132,9 +132,9 @@ const selectFlightRoute = {
           }
         });
 
-        commit(SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_SUCCESS, { tickets: data });
+        commit(SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_SUCCESS, { flights: data });
       } catch (e) {
-        commit(SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_FAILURE);
+        commit(SELECT_FLIGHT__LOAD_OUTBOUND_FLIGHTS_FAILURE);
       }
     },
 
@@ -147,7 +147,7 @@ const selectFlightRoute = {
       commit(SELECT_FLIGHT__SET_FIELDS, { arrivalDate });
 
       try {
-        commit(SELECT_FLIGHT__LOAD_INBOUND_TICKETS_START);
+        commit(SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_START);
 
         const { data } = await dispatch(API__GET, {
           path: "/search",
@@ -158,17 +158,17 @@ const selectFlightRoute = {
           }
         });
 
-        commit(SELECT_FLIGHT__LOAD_INBOUND_TICKETS_SUCCESS, { tickets: data });
+        commit(SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_SUCCESS, { flights: data });
       } catch (e) {
-        commit(SELECT_FLIGHT__LOAD_INBOUND_TICKETS_FAILURE);
+        commit(SELECT_FLIGHT__LOAD_INBOUND_FLIGHTS_FAILURE);
       }
     },
 
-    [SELECT_FLIGHT__SET_SELECTED_OUTBOUND_TICKET](
+    [SELECT_FLIGHT__SET_SELECTED_OUTBOUND_FLIGHT](
       { state, commit, dispatch, getters },
       selectedFareSellKey
     ) {
-      const flight = state.outboundTickets.find(({ fares }) =>
+      const flight = state.outboundFlights.find(({ fares }) =>
         fares.find(({ fareSellKey }) => fareSellKey === selectedFareSellKey)
       );
 
@@ -176,7 +176,7 @@ const selectFlightRoute = {
         ({ fareSellKey }) => fareSellKey === selectedFareSellKey
       );
 
-      const selectedOutboundTicket = {
+      const selectedOutboundFlight = {
         id: `${flight.flightNumber}-${fare.fareSellKey}`,
         fareSellKey: selectedFareSellKey,
         departureTime: flight.departure,
@@ -186,19 +186,19 @@ const selectFlightRoute = {
         price: fare.price
       };
 
-      const patch = { selectedOutboundTicket };
+      const patch = { selectedOutboundFlight };
 
-      const outboundDate = new Date(selectedOutboundTicket.departureTime)
+      const outboundDate = new Date(selectedOutboundFlight.departureTime)
         .toISOString()
         .slice(0, 10);
 
-      if (state.selectedInboundTicket) {
-        const inboundDate = new Date(state.selectedInboundTicket.departureTime)
+      if (state.selectedInboundFlight) {
+        const inboundDate = new Date(state.selectedInboundFlight.departureTime)
           .toISOString()
           .slice(0, 10);
 
         if (inboundDate <= outboundDate) {
-          patch.selectedInboundTicket = null;
+          patch.selectedInboundFlight = null;
         }
       }
 
@@ -214,11 +214,11 @@ const selectFlightRoute = {
       }
     },
 
-    [SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET](
+    [SELECT_FLIGHT__SET_SELECTED_INBOUND_FLIGHT](
       { state, commit, getters },
       selectedFareSellKey
     ) {
-      const flight = state.inboundTickets.find(({ fares }) =>
+      const flight = state.inboundFlights.find(({ fares }) =>
         fares.find(({ fareSellKey }) => fareSellKey === selectedFareSellKey)
       );
 
@@ -226,7 +226,7 @@ const selectFlightRoute = {
         ({ fareSellKey }) => fareSellKey === selectedFareSellKey
       );
 
-      const selectedInboundTicket = {
+      const selectedInboundFlight = {
         id: `${flight.flightNumber}-${fare.fareSellKey}`,
         fareSellKey: selectedFareSellKey,
         departureTime: flight.departure,
@@ -236,7 +236,7 @@ const selectFlightRoute = {
         price: fare.price
       };
 
-      commit(SELECT_FLIGHT__SET_FIELDS, { selectedInboundTicket });
+      commit(SELECT_FLIGHT__SET_FIELDS, { selectedInboundFlight });
     },
 
     [SELECT_FLIGHT__SUBMIT]({ commit }) {
@@ -256,16 +256,16 @@ const selectFlightRoute = {
     selectFlightDepartureDate: state => state.departureDate,
     selectFlightArrivalDate: state => state.arrivalDate,
 
-    selectFlightOutboundTickets: state => state.outboundTickets,
+    selectFlightOutboundFlights: state => state.outboundFlights,
 
-    selectFlightInboundTickets: state => state.inboundTickets,
+    selectFlightInboundFlights: state => state.inboundFlights,
 
-    selectFlightSelectedOutboundTicket: state => state.selectedOutboundTicket,
+    selectFlightSelectedOutboundFlight: state => state.selectedOutboundFlight,
 
-    selectFlightSelectedInboundTicket: state => state.selectedInboundTicket,
+    selectFlightSelectedInboundFlight: state => state.selectedInboundFlight,
 
-    selectFlightSelectedTickets: state =>
-      [state.selectedOutboundTicket, state.selectedInboundTicket].filter(
+    selectFlightSelectedFlights: state =>
+      [state.selectedOutboundFlight, state.selectedInboundFlight].filter(
         truthy => truthy
       ),
 

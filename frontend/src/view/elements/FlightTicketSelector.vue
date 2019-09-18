@@ -30,8 +30,8 @@ export default {
     }
   },
   methods: {
-    handleTicketClick(fareSellKey) {
-      this.$emit("select-ticket", fareSellKey);
+    handleFlightClick(fareSellKey) {
+      this.$emit("flight-change", fareSellKey);
     }
   }
 };
@@ -60,7 +60,7 @@ export default {
               'flight-ticket-selector__button--selected':
                 flight.basicFareSellKey === selectedFareSellKey
             }"
-            @click="handleTicketClick(flight.basicFareSellKey)"
+            @click="handleFlightClick(flight.basicFareSellKey)"
           >
             ${{ flight.basicPrice }}
           </button>
@@ -75,7 +75,7 @@ export default {
               'flight-ticket-selector__button--selected':
                 flight.standardFareSellKey === selectedFareSellKey
             }"
-            @click="handleTicketClick(flight.standardFareSellKey)"
+            @click="handleFlightClick(flight.standardFareSellKey)"
           >
             ${{ flight.standardPrice }}
           </button>
@@ -88,7 +88,7 @@ export default {
               'flight-ticket-selector__button--selected':
                 flight.premiumFareSellKey === selectedFareSellKey
             }"
-            @click="handleTicketClick(flight.premiumFareSellKey)"
+            @click="handleFlightClick(flight.premiumFareSellKey)"
           >
             ${{ flight.premiumPrice }}
           </button>

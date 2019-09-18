@@ -14,8 +14,8 @@ import {
   SELECT_FLIGHT__LEAVE,
   SELECT_FLIGHT__SET_DEPARTURE_DATE,
   SELECT_FLIGHT__SET_ARRIVAL_DATE,
-  SELECT_FLIGHT__SET_SELECTED_OUTBOUND_TICKET,
-  SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET,
+  SELECT_FLIGHT__SET_SELECTED_OUTBOUND_FLIGHT,
+  SELECT_FLIGHT__SET_SELECTED_INBOUND_FLIGHT,
   SELECT_FLIGHT__SUBMIT,
   SELECT_FLIGHT__CLOSE_MODAL
 } from "~/actions.js";
@@ -54,10 +54,10 @@ export default {
   },
   computed: {
     arrivalMinimumDate() {
-      const { selectedOutboundTicket, today } = this;
+      const { selectedOutboundFlight, today } = this;
 
-      const minimumDate = selectedOutboundTicket
-        ? selectedOutboundTicket.departureTime
+      const minimumDate = selectedOutboundFlight
+        ? selectedOutboundFlight.departureTime
         : today;
 
       const date = new Date(minimumDate);
@@ -69,11 +69,11 @@ export default {
       loading: "selectFlightLoading",
       departureDate: "selectFlightDepartureDate",
       arrivalDate: "selectFlightArrivalDate",
-      outboundTickets: "selectFlightOutboundTickets",
-      inboundTickets: "selectFlightInboundTickets",
-      selectedOutboundTicket: "selectFlightSelectedOutboundTicket",
-      selectedInboundTicket: "selectFlightSelectedInboundTicket",
-      selectedTickets: "selectFlightSelectedTickets",
+      outboundFlights: "selectFlightOutboundFlights",
+      inboundFlights: "selectFlightInboundFlights",
+      selectedOutboundFlight: "selectFlightSelectedOutboundFlight",
+      selectedInboundFlight: "selectFlightSelectedInboundFlight",
+      selectedFlights: "selectFlightSelectedFlights",
       departureStationName: "selectFlightDepartureStationName",
       destinationStationName: "selectFlightDestinationStationName",
       showCheckoutModal: "selectFlightShowCheckoutModal"
@@ -83,8 +83,8 @@ export default {
     ...mapActions({
       handleDepartureDateChange: SELECT_FLIGHT__SET_DEPARTURE_DATE,
       handleArrivalDateChange: SELECT_FLIGHT__SET_ARRIVAL_DATE,
-      handleOutboundTicketChange: SELECT_FLIGHT__SET_SELECTED_OUTBOUND_TICKET,
-      handleInboundTicketChange: SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET,
+      handleOutboundFlightChange: SELECT_FLIGHT__SET_SELECTED_OUTBOUND_FLIGHT,
+      handleInboundFlightChange: SELECT_FLIGHT__SET_SELECTED_INBOUND_FLIGHT,
       handleSubmit: SELECT_FLIGHT__SUBMIT,
       handleCloseModal: SELECT_FLIGHT__CLOSE_MODAL
     })
@@ -101,40 +101,40 @@ export default {
     >
       <flights-card
         slot="flights"
-        :flights="selectedTickets"
+        :flights="selectedFlights"
         @submit="handleSubmit"
       />
       <flight-selector-card
         slot="cards"
         :departure-station="departureStationName"
         :destination-station="destinationStationName"
-        :flights="outboundTickets"
+        :flights="outboundFlights"
         :selected-fare-sell-key="
-          selectedOutboundTicket ? selectedOutboundTicket.fareSellKey : null
+          selectedOutboundFlight ? selectedOutboundFlight.fareSellKey : null
         "
         :departure-date="departureDate"
         :minimum-departure-date="today"
         @date-change="handleDepartureDateChange"
-        @ticket-change="handleOutboundTicketChange"
+        @flight-change="handleOutboundFlightChange"
       />
       <flight-selector-card
         slot="cards"
         inbound
         :departure-station="destinationStationName"
         :destination-station="departureStationName"
-        :flights="inboundTickets"
+        :flights="inboundFlights"
         :selected-fare-sell-key="
-          selectedInboundTicket ? selectedInboundTicket.fareSellKey : null
+          selectedInboundFlight ? selectedInboundFlight.fareSellKey : null
         "
         :departure-date="arrivalDate"
         :minimum-departure-date="arrivalMinimumDate"
         @date-change="handleArrivalDateChange"
-        @ticket-change="handleInboundTicketChange"
+        @flight-change="handleInboundFlightChange"
       />
     </select-flight-layout>
     <checkout-modal
       v-if="showCheckoutModal"
-      :flights="selectedTickets"
+      :flights="selectedFlights"
       @close="handleCloseModal"
     />
   </fragment>
