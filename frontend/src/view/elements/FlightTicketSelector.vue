@@ -14,7 +14,7 @@ export default {
       return this.flights.map(({ departure, arrival, fares }) => {
         const basicFare = fares.find(({ bundle }) => bundle === "basic");
         const standardFare = fares.find(({ bundle }) => bundle === "standard");
-        const premiumFare = fares.find(({ bundle }) => bundle === "plus");
+        const plusFare = fares.find(({ bundle }) => bundle === "plus");
 
         return {
           departureTimeString: renderTime(departure),
@@ -23,8 +23,8 @@ export default {
           basicFareSellKey: basicFare.fareSellKey,
           standardPrice: standardFare.price,
           standardFareSellKey: standardFare.fareSellKey,
-          premiumPrice: premiumFare.price,
-          premiumFareSellKey: premiumFare.fareSellKey
+          plusPrice: plusFare.price,
+          plusFareSellKey: plusFare.fareSellKey
         };
       });
     }
@@ -86,11 +86,11 @@ export default {
             :class="{
               'flight-ticket-selector__button': true,
               'flight-ticket-selector__button--selected':
-                flight.premiumFareSellKey === selectedFareSellKey
+                flight.plusFareSellKey === selectedFareSellKey
             }"
-            @click="handleFlightClick(flight.premiumFareSellKey)"
+            @click="handleFlightClick(flight.plusFareSellKey)"
           >
-            ${{ flight.premiumPrice }}
+            ${{ flight.plusPrice }}
           </button>
         </div>
       </div>
