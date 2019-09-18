@@ -2,6 +2,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 import {
+  CheckoutModal,
   FlightsCard,
   FlightSelectorCard,
   SelectFlightLayout
@@ -13,11 +14,14 @@ import {
   SELECT_FLIGHT__SET_DEPARTURE_DATE,
   SELECT_FLIGHT__SET_ARRIVAL_DATE,
   SELECT_FLIGHT__SET_SELECTED_OUTBOUND_TICKET,
-  SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET
+  SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET,
+  SELECT_FLIGHT__SUBMIT,
+  SELECT_FLIGHT__CLOSE_MODAL
 } from "~/actions.js";
 
 export default {
   components: {
+    CheckoutModal,
     FlightsCard,
     FlightSelectorCard,
     SelectFlightLayout
@@ -69,7 +73,8 @@ export default {
       selectedInboundTicket: "selectFlightSelectedInboundTicket",
       selectedTickets: "selectFlightSelectedTickets",
       departureStationName: "selectFlightDepartureStationName",
-      destinationStationName: "selectFlightDestinationStationName"
+      destinationStationName: "selectFlightDestinationStationName",
+      showCheckoutModal: "selectFlightShowCheckoutModal"
     })
   },
   methods: {
@@ -77,7 +82,9 @@ export default {
       handleDepartureDateChange: SELECT_FLIGHT__SET_DEPARTURE_DATE,
       handleArrivalDateChange: SELECT_FLIGHT__SET_ARRIVAL_DATE,
       handleOutboundTicketChange: SELECT_FLIGHT__SET_SELECTED_OUTBOUND_TICKET,
-      handleInboundTicketChange: SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET
+      handleInboundTicketChange: SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET,
+      handleSubmit: SELECT_FLIGHT__SUBMIT,
+      handleCloseModal: SELECT_FLIGHT__CLOSE_MODAL
     })
   }
 };
@@ -89,7 +96,11 @@ export default {
       :departure-station="departureStationName"
       :destination-station="destinationStationName"
     >
-      <flights-card slot="flights" :flights="selectedTickets" />
+      <flights-card
+        slot="flights"
+        :flights="selectedTickets"
+        @submit="handleSubmit"
+      />
       <flight-selector-card
         slot="cards"
         :departure-station="departureStationName"
@@ -118,6 +129,11 @@ export default {
         @ticket-change="handleInboundTicketChange"
       />
     </select-flight-layout>
+    <checkout-modal
+      v-if="showCheckoutModal"
+      :flights="selectedTickets"
+      @close="handleCloseModal"
+    />
   </fragment>
 </template>
 

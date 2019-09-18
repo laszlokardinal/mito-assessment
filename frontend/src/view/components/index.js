@@ -1,3 +1,4 @@
+export CheckoutModal from "./CheckoutModal.vue";
 export DateInputField from "./DateInputField.vue";
 export DropdownInputField from "./DropdownInputField.vue";
 export FlightsCard from "./FlightsCard.vue";

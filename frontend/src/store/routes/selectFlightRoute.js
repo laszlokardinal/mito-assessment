@@ -9,6 +9,7 @@ import {
   SELECT_FLIGHT__SET_SELECTED_INBOUND_TICKET,
   SELECT_FLIGHT__LEAVE,
   SELECT_FLIGHT__SUBMIT,
+  SELECT_FLIGHT__CLOSE_MODAL,
   STATIONS__LOAD
 } from "~/actions.js";
 
@@ -36,7 +37,9 @@ const selectFlightRoute = {
     departureIata: null,
     destinationIata: null,
     departureDate: null,
-    arrivalDate: null
+    arrivalDate: null,
+
+    showCheckoutModal: false
   },
   mutations: {
     [SELECT_FLIGHT__LOAD_OUTBOUND_TICKETS_START](state) {
@@ -82,6 +85,7 @@ const selectFlightRoute = {
       state.destinationIata = null;
       state.departureDate = null;
       state.arrivalDate = null;
+      state.showCheckoutModal = false;
     }
   },
   actions: {
@@ -235,7 +239,13 @@ const selectFlightRoute = {
       commit(SELECT_FLIGHT__SET_FIELDS, { selectedInboundTicket });
     },
 
-    [SELECT_FLIGHT__SUBMIT]() {}
+    [SELECT_FLIGHT__SUBMIT]({ commit }) {
+      commit(SELECT_FLIGHT__SET_FIELDS, { showCheckoutModal: true });
+    },
+
+    [SELECT_FLIGHT__CLOSE_MODAL]({ commit }) {
+      commit(SELECT_FLIGHT__SET_FIELDS, { showCheckoutModal: false });
+    }
   },
   getters: {
     selectFlightLoading: (state, idx1, idx2, rootGetters) =>
@@ -273,7 +283,9 @@ const selectFlightRoute = {
       );
 
       return station ? station.shortName : "";
-    }
+    },
+
+    selectFlightShowCheckoutModal: state => state.showCheckoutModal
   }
 };
 
