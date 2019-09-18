@@ -22,10 +22,12 @@
   height: 250px;
   overflow-y: scroll;
 
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-input__flex-wrapper {
   display: flex;
   flex-direction: column;
-
-  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-input__item {

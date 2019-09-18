@@ -14,18 +14,20 @@ export default {
 
 <template>
   <div class="dropdown-list__wrapper">
-    <template v-for="option in options">
-      <button
-        :key="option.id"
-        :class="{
-          'dropdown-list__item': true,
-          'dropdown-list__item--selected': option.id === value
-        }"
-        @mousedown="handleMouseDown(option.id)"
-      >
-        {{ option.title }}
-      </button>
-    </template>
+    <div class="dropdown-list__flex-wrapper">
+      <template v-for="option in options">
+        <button
+          :key="option.id"
+          :class="{
+            'dropdown-list__item': true,
+            'dropdown-list__item--selected': option.id === value
+          }"
+          @mousedown="handleMouseDown(option.id)"
+        >
+          <span>{{ option.title }}</span>
+        </button>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -42,7 +44,9 @@ export default {
 
   background: $white;
   box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.1);
+}
 
+.dropdown-list__flex-wrapper {
   display: flex;
   flex-direction: column;
 }
